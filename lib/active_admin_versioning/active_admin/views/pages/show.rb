@@ -54,6 +54,8 @@ module ActiveAdminVersioning
           end
 
           def decrypt_field(method, value)
+            pp method
+            pp value
             if method.end_with? "_ciphertext"
               decrypte_value(method, value)
             else
