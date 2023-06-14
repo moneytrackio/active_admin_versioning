@@ -64,9 +64,11 @@ module ActiveAdminVersioning
           end
 
           def decrypte_value(method, value)
-            return resource.class.send(decrypted_method(method), value) if klass.respond_to? decrypted_method(method)
+            unless resource.class.respond_to? decrypted_method(method)
+              return value
+            end
 
-            value
+            resource.class.send(decrypted_method(method), value)
           end
 
           def base_method(method)
